@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('rol');
             $table->text('documento');
             $table->text('foto');
+            $table->text('prueba');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,7 +25,7 @@
 
               @else
 
-              <img src="{{url("storage/ . auth()->user()->foto")}}" class="user-image" alt="User Image">
+              <img src="{{url('storage/' . auth()->user()->foto)}}" class="user-image" alt="User Image">
 
             @endif
               <span class="hidden-xs">{{ auth()->user()->name }}</span>
@@ -43,11 +43,15 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Mis datos</a>
+                  <a href="{{url('Mis-datos')}}" class="btn btn-default btn-flat">Mis datos</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Salir</a>
+                  <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                  </form>
                 </div>
+               
               </li>
             </ul>
           </li>

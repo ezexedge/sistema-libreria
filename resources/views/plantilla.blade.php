@@ -24,9 +24,13 @@
   <!-- Date Picker -->
   <link rel="stylesheet" href="http://localhost:8888/librerias-L8/public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="http://localhost:8888/librerias-L8/publicbower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="http://localhost:8888/librerias-L8/public/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
+  <link rel="stylesheet" href="http://localhost:8888/librerias-L8/public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8888/librerias-L8/public/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+
+
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,7 +68,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="http://localhost:8888/librerias-L8/public/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="http://localhost:8888/librerias-L8/public/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -89,20 +93,170 @@
 <!-- datepicker -->
 <script src="http://localhost:8888/librerias-L8/public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
 <script src="http://localhost:8888/librerias-L8/public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="http://localhost:8888/librerias-L8/public/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/dist/js/demo.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
+
+<script src="http://localhost:8888/librerias-L8/public/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+
+
+<script src="http://localhost:8888/librerias-L8/public/bower_components/input-mask/dist/input-mask/jquery.inputmask.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/bower_components/input-mask/dist/input-mask/inputmask.date.extensions.js"></script>
+<script src="http://localhost:8888/librerias-L8/public/bower_components/input-mask/dist/input-mask/inputmask.extensions.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8-beta.17/jquery.inputmask.min.js" integrity="sha512-zdfH1XdRONkxXKLQxCI2Ak3c9wNymTiPh5cU4OsUavFDATDbUzLR+SYWWz0RkhDmBDT0gNSUe4xrQXx8D89JIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
+
+if (jQuery) {  
+
+
+  $('[data-mask]').inputmask()
+
+  $('.table').on('click','.EliminarCliente',function (){
+  var Cid = $(this).attr('Cid')
+  var Cliente = $(this).attr('Cliente')
+
+  Swal.fire({
+    title:'Estas seguro de eliminar ' + Cliente  + ' ?',
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonText: 'Cancelar',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Eliminar',
+    confirmButtonColor: '#3085d6'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      window.location = "{{ url('Eliminar-cliente/') }}/" + Cid
+
+    }
+  })
+})
+
+
+$('.table').on('click','.EliminarUsuario',function (){
+  var Uid = $(this).attr('uid')
+  var Usuario = $(this).attr('usuario')
+
+  Swal.fire({
+    title:'Estas seguro de eliminar ' + Usuario  + ' ?',
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonText: 'Cancelar',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Eliminar',
+    confirmButtonColor: '#3085d6'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      window.location = "Eliminar-Usuario/" + Uid
+    }
+  })
+})
+
+
+$(".table").DataTable({
+
+"language": {
+
+  "sSearch": "Buscar:",
+  "sEmptyTable": "No hay datos en la Tabla",
+  "sZeroRecords": "No se encontraron resultados",
+  "sInfo": "Mostrando registros del _START_ al _END_ de un total _TOTAL_",
+  "SInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+  "sInfoFiltered": "(filtrando de un total de _MAX_ registros)",
+  "oPaginate": {
+
+    "sFirst": "Primero",
+    "sLast": "Último",
+    "sNext": "Siguiente",
+    "sPrevious": "Anterior"
+
+  },
+
+  "sLoadingRecords": "Cargando...",
+  "sLengthMenu": "Mostrar _MENU_ registros"
+
+
+}
+
+
+
+});
+
+
+               // jQuery is loaded  
+             } else {
+               // jQuery is not loaded
+               alert("Doesn't Work");
+             }
+
   $('.sidebar-menu').tree()
+
+
+$(".EliminarUsuario").on("click", function(){
+    alert("The paragraph is clicked.");
+});
+
+
 </script>
+
+@if(session("UsuarioCreado") == "OK")
+<script type="text/javascript">
+    
+    Swal.fire('El usuario ah sido creado','','success')
+
+
+  </script>
+
+
+@elseif(session("ClienteCreado") == "OK")
+<script type="text/javascript">
+    
+    Swal.fire('El cliente ah sido creado','','success')
+
+
+  </script>
+@elseif(session("ClienteActualizado") == "OK")
+<script type="text/javascript">
+    
+    Swal.fire('El cliente ah sido actualizado','','success')
+
+
+  </script>
+@endif
+<?php
+
+  $exp = explode('/',$_SERVER["REQUEST_URI"]);
+
+
+
+?>
+
+@if($exp[3] == 'Editar-Usuario')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#EditarUsuario').modal('toggle')
+  })
+</script>
+@elseif($exp[3] == 'Editar-Cliente')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#EditarCliente').modal('toggle')
+  })
+</script>
+
+@endif
 </body>
 </html>

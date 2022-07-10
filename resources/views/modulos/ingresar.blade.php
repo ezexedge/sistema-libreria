@@ -16,7 +16,10 @@
         
         <div class="form-group has-feedback">
           <input type="email" class="form-control" placeholder="Email"
-          value={{old('email')}}
+          name="email"
+
+          value="{{old('email')}}"
+
           
           >
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
